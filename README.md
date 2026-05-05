@@ -7,12 +7,6 @@ A minimal local workspace for AWS certification course examples.
 - `README.md`: setup and usage instructions
 - `bootstrap-aws.sh`: cross-platform local AWS CLI bootstrap script
 
-## What This Repo Is Not
-
-- Not a Gitpod workspace
-- Not a cloud pod setup
-- Not dependent on `.gitpod.yml`
-
 This repo is intentionally local-first and minimal.
 
 ## What The Bootstrap Script Does

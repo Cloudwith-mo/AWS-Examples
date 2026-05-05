@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # This script helps you set up AWS CLI locally on your machine.
-# It is meant for local development (not Gitpod).
+# It is meant for local development.
 #
 # Supported flows:
 # - Linux: download and install AWS CLI v2 from the official zip package
