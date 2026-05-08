@@ -1,58 +1,74 @@
 # AWS-Examples
 
-A minimal local workspace for AWS certification course examples.
+Local AWS CLI practice workspace for certification prep, currently focused on S3 automation with bash scripts.
 
-## What Is In This Repo
+## Status
 
-- `README.md`: setup and usage instructions
-- `bootstrap-aws.sh`: cross-platform local AWS CLI bootstrap script
+- AWS CLI bootstrap script is working.
+- S3 script set exists in `s3/bash-scripts`.
+- `put-object` is still a placeholder.
 
-This repo is intentionally local-first and minimal.
+## Prerequisites
 
-## What The Bootstrap Script Does
+- AWS CLI v2
+- Configured AWS credentials (`aws configure`)
+- `jq` (for bucket listing scripts)
+- `tree` (for `sync` output preview)
 
-`bootstrap-aws.sh` will:
+## Bootstrap AWS CLI
 
-1. Detect your OS (Linux, macOS, or Windows via Git Bash/MSYS/Cygwin).
-2. Install AWS CLI v2 only if it is not already installed.
-3. Verify the installation with `aws --version`.
-4. Set `AWS_CLI_AUTO_PROMPT=on-partial` for the current shell session.
-5. Clean up downloaded installer files.
-
-## How To Run It
-
-### Linux / macOS
+Run:
 
 ```bash
 bash ./bootstrap-aws.sh
 ```
 
-### Windows
+The script:
 
-Run from Git Bash (or a compatible bash shell):
+1. Detects OS (Linux, macOS, Windows via Git Bash/MSYS/Cygwin).
+2. Installs AWS CLI v2 if missing.
+3. Verifies install with `aws --version`.
+4. Sets `AWS_CLI_AUTO_PROMPT=on-partial` for the current shell session.
+5. Cleans up installer artifacts.
+
+## S3 Scripts
+
+All scripts are in `s3/bash-scripts`:
+
+- `create-bucket <bucket>`: create bucket (`us-east-1`)
+- `delete-bucket <bucket>`: delete bucket (must be empty)
+- `get-newest-bucket`: print newest bucket name
+- `list-buckets`: print 5 newest buckets
+- `list-objects <bucket>`: list objects in bucket
+- `put-object`: placeholder
+- `sync <bucket> <prefix>`: generate random local files and sync to `s3://<bucket>/files`
+
+## Quick Start
+
+1. Install and verify CLI:
+
+	```bash
+	bash ./bootstrap-aws.sh
+	aws --version
+	```
+
+2. Configure AWS credentials:
+
+	```bash
+	aws configure
+	aws sts get-caller-identity
+	```
+
+3. Try S3 scripts:
 
 ```bash
-bash ./bootstrap-aws.sh
+./s3/bash-scripts/create-bucket my-unique-bucket-name
+./s3/bash-scripts/list-buckets
+./s3/bash-scripts/sync my-unique-bucket-name demo
+./s3/bash-scripts/list-objects my-unique-bucket-name
 ```
 
-The script automatically calls PowerShell for the MSI install on Windows.
+## Notes
 
-## First-Time AWS CLI Configuration
-
-After install, configure your credentials once:
-
-```bash
-aws configure
-```
-
-Then validate identity:
-
-```bash
-aws sts get-caller-identity
-```
-
-## Notes For Beginners
-
-- In PowerShell, do not use `export` or `env` (those are bash commands).
-- In PowerShell, use `$env:NAME="value"` format when needed.
-- If `aws` is not recognized after install, open a new terminal and try again.
+- On Windows, run scripts from Git Bash or another bash-compatible shell.
+- If `aws` is not recognized after install, open a new terminal and retry.
