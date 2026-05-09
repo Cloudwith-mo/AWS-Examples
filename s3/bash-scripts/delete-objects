@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+echo "== delete-objects"
+
+# Exit immediately if a command returns a non-zero status
+set -e
+
+# Check for bucket name
+if [ -z "$1" ]; then
+  echo "There needs to be a bucket name eg. ./bucket my-bucket-name"
+  exit 1
+fi
+
+BUCKET_NAME=$1
+{
+    "Objects": [
+        {
+            "Key" : "test1.txt"
+        }
+    ],
+    "Quiet": false
+}
+
+(aws s3api list-objects-v2 --bucket $BUCKET_NAME) | jq -r '.Contents[].Key'
+
+aws s3api list-objects-v2 --bucket $BUCKET_NAME 
