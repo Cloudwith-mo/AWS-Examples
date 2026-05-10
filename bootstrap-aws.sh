@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Bootstrap v1
+
 # This script helps you set up AWS CLI locally on your machine.
 # It is meant for local development.
 #
@@ -86,3 +88,64 @@ echo "AWS_CLI_AUTO_PROMPT=${AWS_CLI_AUTO_PROMPT}"
 
 # Final guidance for first-time setup.
 echo "Done. If this is your first time, run: aws configure"
+
+
+#Bootstrap v2
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+echo "== bootstrap aws environment =="
+
+echo "[1/5] Installing utilities..."
+sudo apt-get update
+sudo apt-get install -y tree unzip curl wget apt-transport-https software-properties-common
+
+echo "[2/5] Installing PowerShell..."
+if command -v pwsh >/dev/null 2>&1; then
+  echo "PowerShell already installed."
+else
+  source /etc/os-release
+  wget -q "https://packages.microsoft.com/config/ubuntu/${VERSION_ID}/packages-microsoft-prod.deb"
+  sudo dpkg -i packages-microsoft-prod.deb
+  rm packages-microsoft-prod.deb
+  sudo apt-get update
+  sudo apt-get install -y powershell
+fi
+
+echo "[3/5] Installing AWS CLI v2..."
+if command -v aws >/dev/null 2>&1; then
+  echo "AWS CLI already installed."
+else
+  curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+  unzip -o awscliv2.zip
+  sudo ./aws/install --update
+  rm -rf aws awscliv2.zip
+fi
+
+echo "[4/6] Installing Ruby..."
+if command -v ruby >/dev/null 2>&1; then
+  echo "Ruby already installed."
+else
+  sudo apt-get install -y ruby-full
+fi
+
+echo "[5/6] Installing Java..."
+if command -v java >/dev/null 2>&1; then
+  echo "Java already installed."
+else
+  sudo apt-get install -y openjdk-21-jdk
+fi
+
+echo "[6/6] Verifying installs..."
+tree --version || true
+pwsh --version
+aws --version
+ruby --version
+java --version
+
+echo "[5/5] Setting AWS auto prompt..."
+export AWS_CLI_AUTO_PROMPT=on-partial
+echo "AWS_CLI_AUTO_PROMPT=on-partial"
+
+echo "Done. If first time, run: aws configure"
