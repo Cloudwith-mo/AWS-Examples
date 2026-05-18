@@ -1,0 +1,1 @@
+console.log("Hello from S3 CORS example");
