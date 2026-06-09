@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+echo "== deploy rds"
+
+STACK_NAME="rds-dms-mysql"
+
+# https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudformation/deploy/index.html
+aws cloudformation deploy \
+--template-file cfn/mysql.yaml \
+--capabilities CAPABILITY_NAMED_IAM \
+--no-execute-changeset \
+--parameter-overrides VpcId="vpc-044351ec57a9d763b" Subnets="subnet-0ee86e83bfb829c78,subnet-0a05b3f6fa8b4f304,subnet-0591d6e464acc4da8" \
+--region us-east-1 \
+--stack-name $STACK_NAME
