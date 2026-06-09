@@ -1,0 +1,15 @@
+curl http://169.254.169.254/latest/meta-data
+
+curl http://169.254.169.254/latest/meta-data/public-ipv4
+
+
+wget -qO - http://169.254.169.254/latest/meta-data
+
+aws ec2 modify-instance-metadata-options \
+--instance-id i-059a099916612863e \
+--http-tokens required \
+--region us-east-1
+
+TOKEN=$(curl -X PUT "http://169.254.169.254/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600" --silent)
+
+echo $TOKEN

@@ -1,0 +1,13 @@
+ #generate key pair
+ ssh-keygen -t rsa -f ec2connect
+ 
+
+aws ec2-instance-connect send-ssh-public-key \
+    --instance-id i-01579871a08b592c6 \
+    --instance-os-user ec2-user \
+    --availability-zone us-east-1d \
+    --ssh-public-key file://ec2connect.pub
+
+#connect to instance 
+ssh -i ec2connect ec2-user@54.198.198.179
+
