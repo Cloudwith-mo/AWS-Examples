@@ -13,3 +13,6 @@ terraform.tfstate
 # Ruby dependency/cache folders
 .bundle/
 s3/sdk/ruby/vendor/
+
+**/.bundle/
+**/vendor/bundle/
