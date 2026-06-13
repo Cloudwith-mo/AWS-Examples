@@ -16,3 +16,10 @@ s3/sdk/ruby/vendor/
 
 **/.bundle/
 **/vendor/bundle/
+
+cat >> ~/projects/AWS-Examples/.gitignore <<'EOF'
+
+# Ruby Bundler
+.bundle/
+vendor/bundle/
+EOF
