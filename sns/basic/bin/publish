@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -e
+
+TOPIC_ARN="arn:aws:sns:us-east-1:114743615542:sns-basic-lambda-SNSTopic-muFKLIuc3wpt"
+
+aws sns publish \
+--topic-arn $TOPIC_ARN \
+--message file://message.txt
