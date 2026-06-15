@@ -23,3 +23,10 @@ cat >> ~/projects/AWS-Examples/.gitignore <<'EOF'
 .bundle/
 vendor/bundle/
 EOF
+
+cat >> ~/projects/AWS-Examples/.gitignore <<'EOF'
+
+# Ruby Bundler
+.bundle/
+vendor/bundle/
+EOF
