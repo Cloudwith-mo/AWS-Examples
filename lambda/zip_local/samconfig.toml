@@ -1,0 +1,5 @@
+version=0.1
+
+[default.deploy.parameters]
+s3_bucket = "my-lambda-artifacts-mko-2018"
+region = "us-east-1"

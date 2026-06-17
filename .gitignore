@@ -30,3 +30,20 @@ cat >> ~/projects/AWS-Examples/.gitignore <<'EOF'
 .bundle/
 vendor/bundle/
 EOF
+
+cat >> .gitignore <<'EOF'
+
+# SAM CLI installer files
+sam-installation/
+samcli.zip
+EOF
+
+cat >> .gitignore <<'EOF'
+
+# Python virtual environments
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+EOF
