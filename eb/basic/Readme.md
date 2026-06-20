@@ -40,3 +40,11 @@ bundle exec rails db:migrate
 git clone https://github.com/aws/aws-elastic-beanstalk-cli-setup.git
 
 python ./aws-elastic-beanstalk-cli-setup/scripts/ebcli_installer.py
+
+
+
+#  Package for EB
+zip -r package.zip example
+
+# Cleanup
+cfn, rds (snapshots), ec2, 
