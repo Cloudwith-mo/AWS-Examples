@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+echo "== deploy rds"
+
+STACK_NAME="rds-basic"
+
+# https://awscli.amazonaws.com/v2/documentation/api/latest/reference/cloudformation/deploy/index.html
+aws cloudformation deploy \
+--template-file template.yaml \
+--capabilities CAPABILITY_NAMED_IAM \
+--no-execute-changeset \
+--parameter-overrides VpcId="vpc-044351ec57a9d763b" WebServerSGGroupId="sg-00fa32048f06654e6" RdsSecretArn="arn:aws:secretsmanager:us-east-1:114743615542:secret:MyRdsPassword-W1UID3" Username="muhammadadeyemi" Subnets="subnet-03834a61cea1911eb,subnet-0ee86e83bfb829c78,subnet-0591d6e464acc4da8" \
+--region us-east-1 \
+--stack-name $STACK_NAME
